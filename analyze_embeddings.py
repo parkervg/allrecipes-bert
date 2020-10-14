@@ -75,7 +75,7 @@ def get_top_bert_verbs(noun: str, noun_embedding: tf.Tensor, verb_embeddings: Di
     return [item[0] for item in sorted_verbs[:k]]
 
 def get_top_epic_verbs(noun: str, df: pd.DataFrame, k = 5, log = False):
-    existing_verbs = df.loc[df["noun"].str.startswith(noun), "verb"].tolist()
+    existing_verbs = df.loc[df["base_noun"] == noun, "base_verb"].tolist()
     top_verbs = Counter(existing_verbs)
     if log:
         logger.yellow("Top EpicKitchen verbs for '{}':".format(noun))
