@@ -3,612 +3,473 @@ Notes:
     - Have probability threshold required to accept it
   - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
     - Examples:
-      - spices clustered together, non-food items clustered together
-      - [Cluster 2](#cluster-2) of appliances: 'take', 'put', etc. but no 'toss', 'pour', 'dice', etc.
+  - [Cluster 2](#cluster-2) of appliances: 'take', 'put', etc. but no 'toss', 'pour', 'dice', etc.
+  - [Cluster 9](#cluster-9): many things you can "open"
     - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
     - Maybe use SHAP with classification to extract subspace related to allowed actions
 
 
 coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in the cluster)
+Kmean with k = 15
 
 ## CLUSTER 0
-#### Cluster coherence score: 0.484
-#### Top Verbs: [('put', 52), ('take', 34), ('open', 26), ('pick-up', 24), ('close', 19)]
-- box
-- poster
-- transparent
-- holder
-- crab
-- tail
-- canned
-- sponge
-- hop
-- mat
-- food
-- filtered
-- case
-- rubber
-- maker
-- grocery
-- ingredient
-- socket
-- pan
-- remaining
-- waste
-- cleaner
-- mushroom
-- plug
-- ladder
-- sausage
-- wire
-- cap
-- shirt
-- lid
-- filter
-- mustard
-- plain
-- pine
-- closet
-- peeled
-- rag
-- bouquet
-- own
-- mixture
-- recipe
-- vinegar
-- spice
-- clothes
-- cinnamon
-- shelf
-- rosemary
-- clip
-- herb
-- convenient
-- liquid
-- cupboard
-- instruction
-- get
-- paste
-- maple
-- bucket
-- transferring
-- olive
-- tube
-- flap
-- kettle
-- dough
-- stove
-- sesame
-- container
-- floor
-- pea
-- nut
-- funnel
-- tile
-- laundry
-- bottle
-- basket
-- mesh
-- fan
-- electronic
-- fried
-- pear
-- broom
-- dirty
-- desk
-- hamburger
-- wall
-- scale
-- tin
-- straw
-- boxer
-- vegetable
-- flower
-- drawer
-- lamp
-- rug
-- spaghetti
-- coke
-- bin
-- grape
-- glove
-- leaf
-- salmon
-- oven
-- packet
-- rim
-- counter
-- cabbage
-- plastic
-- flavour
-- almond
-- spot
-- processor
-- splitting
-- outer
-- cup
-- machine
-- foil
-- board
-- timer
-- boiling
-- lighter
-- yeast
-- patty
-- sock
-- surface
-- knob
-- shrimp
-- bulb
-- scrap
-- chopper
-- t
-- beef
-- white
-- cork
-- heart
-- cardboard
-- garbage
-- excess
-- weighing
-- rest
-- package
-- temperature
-- rocket
-- extra
-- locker
-- tissue
-- inner
-- cooked
-- pressure
-- hood
-- wooden
-- sauce
-- sleeve
-- shell
-- scissors
-- packaging
-- tidy
-- jug
-- squash
+#### Cluster coherence score: 0.571
+#### Top Verbs: [('pick-up', 6), ('put-down', 5), ('put', 4), ('take', 3), ('wash', 2)]
+- peeler
+- pestle
+- drainer
+- brusher
+- washer
+- seasoning
+- detergent
+- utensil
+- strainer
+- presser
+- spatula
+- blender
+- sticker
+- burner
+- grinder
 
 
 ## CLUSTER 1
-#### Cluster coherence score: 0.636
-#### Top Verbs: [('put', 4), ('pick-up', 3), ('put-down', 3), ('cut', 2), ('take', 2)]
-- avocado
-- tupperware
-- mozzarella
-- turmeric
-- prosciutto
-- risotto
-- tortilla
-- lettuce
-- mezzaluna
+#### Cluster coherence score: 0.498
+#### Top Verbs: [('put', 50), ('pick-up', 32), ('take', 25), ('put-down', 16), ('open', 15)]
+- bag
+- butter
+- cloth
+- serving
+- tablet
+- soy
+- potato
+- mug
+- cheese
+- tuna
+- scoop
+- rolled
+- crisp
+- boil
+- cream
+- spade
+- window
+- soup
+- frozen
+- curry
+- soda
+- pie
+- button
+- switch
+- vinegar
+- sliced
+- remote
+- empty
+- lemon
+- steel
+- jar
+- chip
+- toast
+- flame
+- bay
+- cleaning
+- pepper
+- carrot
+- shopping
+- napkin
+- draining
+- milk
+- left
+- kitchen
+- blade
+- handle
+- baking
+- sink
+- sugar
+- roll
+- cookie
+- popcorn
+- fold
+- steak
+- onion
+- trash
+- fry
+- berry
+- candle
+- basil
+- grill
+- flour
+- clothes
+- sandwich
+- corn
+- skin
+- case
+- sun
+- shrimp
+- sheet
+- peach
+- lime
+- pasta
+- big
+- juice
+- tong
+- small
+- chocolate
+- pizza
+- tea
+- split
+- holder
+- packing
+- eating
+- rolling
+- rack
+- dough
+- dish
+- washing
+- cutting
+- bean
+- alarm
+- drying
+- cereal
+- whole
+- wrapping
+- meat
+- egg
+- peeling
+- peel
+- few
+- beef
+- pot
+- apron
+- pouring
+- tray
+- ham
+- phone
+- balance
+- honey
+- wrap
+- tap
+- measuring
+- form
+- rubbish
+- side
+- my
+- loaf
+- tomato
+- envelope
+- dressing
+- stock
+- pastry
+- oven
+- plate
+- fridge
+- cinnamon
+- pick
+- gas
+- letter
+- canned
 
 
 ## CLUSTER 2
-#### Cluster coherence score: 0.475
-#### Top Verbs: [('pick-up', 7), ('put-down', 6), ('take', 6), ('put', 5), ('open', 4)]
-- cooker
-- presser
-- toaster
-- dishwasher
-- blender
-- washer
-- peeler
-- grinder
+#### Cluster coherence score: 0.722
+#### Top Verbs: [('put', 4), ('pick-up', 3), ('chop', 2), ('take', 2), ('put-down', 2)]
+- yoghurt
+- coriander
+- oregano
 - masher
-- ventilator
-- drainer
-- freezer
-- burner
-- strainer
-- utensil
-- sticker
-- brusher
-- grater
-- spatula
-- heater
-- trouser
-- cutlery
-- pestle
+- cilantro
+- turmeric
+- balsamic
 
 
 ## CLUSTER 3
-#### Cluster coherence score: 0.509
-#### Top Verbs: [('put', 51), ('pick-up', 32), ('take', 25), ('put-down', 15), ('open', 13)]
-- serving
-- tong
-- sun
-- egg
-- tray
-- window
-- dish
-- crisp
-- small
-- coconut
-- split
-- cleaning
-- packing
-- washing
-- bag
-- fold
-- cream
-- envelope
-- form
-- kitchen
-- chip
-- boil
-- button
-- trash
+#### Cluster coherence score: 0.491
+#### Top Verbs: [('put', 39), ('pick-up', 23), ('take', 21), ('open', 14), ('put-down', 14)]
+- heat
+- ginger
+- black
+- seed
+- third
+- lead
+- top
+- banana
+- bacon
+- new
+- sweet
+- hand
 - cooking
-- alarm
-- wrap
-- eating
-- steel
-- milk
-- lime
-- moon
-- handle
-- rack
-- cutting
-- scoop
-- spade
-- blade
-- soap
-- tap
-- stock
-- tea
-- side
-- berry
-- big
-- pick
-- ham
-- bay
-- rolling
-- flame
-- napkin
-- basil
-- pizza
-- peach
-- cookie
-- few
-- jar
-- toast
-- tablet
-- candle
-- soy
-- carrot
-- cheese
-- tomato
-- shopping
-- wrapping
-- steak
-- mug
-- onion
-- pepper
-- phone
-- potato
-- apron
-- grill
-- pastry
-- sandwich
-- left
+- chop
+- dust
+- towel
+- second
+- table
+- fork
+- spoon
+- drink
+- apple
+- oil
+- hot
+- mobile
+- seal
+- cd
+- label
+- instant
+- other
+- fruit
+- press
+- can
+- fish
+- bread
+- wood
+- bowl
+- pack
+- support
+- chinese
+- mix
+- book
 - chicken
-- bean
-- whole
-- letter
-- draining
-- pouring
-- balance
-- cloth
-- peel
-- pie
-- measuring
-- pasta
-- switch
-- frozen
-- flour
-- sheet
-- remote
-- sugar
-- roll
-- sliced
-- popcorn
-- meat
-- rolled
-- lemon
-- empty
-- fridge
-- sink
-- my
-- butter
-- loaf
-- fry
-- pot
-- curry
-- peeling
-- gas
-- cereal
-- drying
-- honey
-- corn
-- chocolate
-- juice
-- skin
-- plate
+- spring
+- wash
+- film
+- cake
+- baby
+- open
+- glass
+- chopped
+- spray
+- microwave
+- work
+- coffee
+- light
+- water
+- chair
+- close
+- slow
+- mint
+- door
+- round
+- national
+- air
+- pitcher
+- more
+- salt
+- soap
+- red
+- moon
+- measure
+- cut
+- bell
+- screw
+- salad
+- pour
+- lunch
+- salsa
+- paper
+- knife
+- power
+- wine
+- right
+- burger
+- ground
+- fire
+- base
+- time
 - garlic
-- baking
-- dressing
-- soda
-- tuna
-- rubbish
-- soup
+- watch
+- beer
+- turkey
+- cabinet
+- finger
+- green
+- pit
+- part
+- draw
+- rice
+- cherry
+- brush
+- refrigerator
+- content
+- only
+- cover
+- coconut
+- take
 
 
 ## CLUSTER 4
-#### Cluster coherence score: 0.635
-#### Top Verbs: [('pick-up', 17), ('put', 14), ('take', 8), ('cut', 8), ('open', 7)]
-- tamagoyaki
-- miso
-- pesto
-- aubergine
-- cafetiere
-- mirin
-- hummus
-- leek
-- moka
-- granola
-- chorizo
-- thyme
-- oregano
-- melon
-- ciabatta
-- coriander
-- salami
-- kiwi
-- nesquik
-- cumin
-- masala
-- paprika
-- jeera
-- galangal
-- spate
-- sushi
-- chilli
-- pineapple
-- pith
-- courgette
-- cayenne
-- jambalaya
-- soya
-- mitten
-- balsamic
-- melba
-- mocha
-- omelette
-- cilantro
-- mitt
+#### Cluster coherence score: 0.667
+#### Top Verbs: [('put', 2), ('mix-on', 1), ('mix', 1), ('sprinkle', 1), ('pick-up', 1)]
+- sprout
+- sweetcorn
+- parsley
 
 
 ## CLUSTER 5
-#### Cluster coherence score: 0.463
-#### Top Verbs: [('pick-up', 12), ('put', 9), ('take', 8), ('put-down', 5), ('throw', 4)]
-- spinker
-- leftover
-- creme
-- rind
-- sachet
-- cob
-- clove
-- passata
-- hob
-- dishrag
-- nutella
-- saag
-- stopper
-- carafe
-- temp
-- dishwater
-- blueberry
-- flatware
-- sharpener
-- rusk
-- noodle
-- wok
-- wastebasket
-- sieve
-- paella
-- fraiche
-- slipper
-- tofu
-- nozzle
-- lasagne
-- v60
-- wrapper
-- dustbin
-- trivet
-- paneer
-- cling
+#### Cluster coherence score: 0.825
+#### Top Verbs: [('pick-up', 8), ('put-down', 8), ('take', 8), ('put', 7), ('wash', 2)]
+- silverware
+- teapot
+- degreaser
+- saucer
+- saucepan
+- dustpan
+- tupperware
+- rinse
+- diced
+- tableware
+- tongs
+- tablecloth
+- colander
+- plated
+- trouser
+- ladle
+- cutlery
 
 
 ## CLUSTER 6
-#### Cluster coherence score: 0.667
-#### Top Verbs: [('pick-up', 8), ('put-down', 8), ('put', 5), ('take', 4), ('spray', 3)]
-- chipping
-- dustpan
-- ladle
-- mincing
-- scrubber
-- frying
-- rinse
-- detergent
-- diced
-- chopstick
-- seasoning
-- extractor
-- minced
-- stirrer
-- cleanser
-- tableware
-- shreddies
-- plated
-- chopping
-- mince
-- dumpling
-- tongs
-- dishing
-- colander
-- degreaser
-- silverware
+#### Cluster coherence score: 0.55
+#### Top Verbs: [('pick-up', 6), ('put-down', 2), ('take', 1), ('wash', 1), ('rinse', 1)]
+- grater
+- carafe
+- mitt
+- mitten
+- temp
+- chilli
+- sieve
+- fraiche
+- creme
 
 
 ## CLUSTER 7
-#### Cluster coherence score: 0.545
-#### Top Verbs: [('put', 4), ('open', 2), ('cut', 2), ('pour', 2), ('slice', 2)]
-- casserole
-- mayonnaise
-- broccoli
-- cucumber
-- ketchup
-- celery
-- oat
-- gravy
-- mincemeat
+#### Cluster coherence score: 0.614
+#### Top Verbs: [('put', 10), ('pick-up', 8), ('take', 3), ('open', 3), ('pour', 3)]
+- smoothie
+- chipping
+- dumpling
+- corncob
+- raisin
+- kiwi
+- pancake
+- cracker
+- biscuit
+- paprika
+- waffle
+- nesquik
+- frying
+- eggshell
+- granola
+- chopping
+- teabag
+- breadcrumb
+- chopstick
+- whisk
 
 
 ## CLUSTER 8
-#### Cluster coherence score: 0.661
-#### Top Verbs: [('put', 13), ('pick-up', 12), ('take', 9), ('put-down', 5), ('pour', 2)]
-- whisk
-- waffle
-- caper
-- raisin
-- saucer
-- pancake
-- scissor
-- yoghurt
-- teapot
-- tablespoon
-- teaspoon
-- eggshell
-- sprout
-- saucepan
-- parsley
-- sweetcorn
-- cracker
-- spinach
-- teabag
-- breadcrumb
-- tablecloth
-- corncob
-- smoothie
-- biscuit
+#### Cluster coherence score: 0.692
+#### Top Verbs: [('put', 3), ('slice', 2), ('cut', 2), ('open', 1), ('close', 1)]
+- cucumber
+- mayonnaise
+- broccoli
+- celery
+- casserole
 
 
 ## CLUSTER 9
-#### Cluster coherence score: 0.491
-#### Top Verbs: [('put', 35), ('pick-up', 23), ('take', 20), ('open', 14), ('put-down', 13)]
-- measure
-- work
-- hand
-- spring
-- salt
-- water
-- time
-- third
-- spray
-- banana
-- sweet
-- burger
-- pour
-- bell
-- part
-- heat
-- wash
-- film
-- hot
-- fish
-- right
-- chinese
-- open
-- lead
-- close
-- seed
-- seal
-- cabinet
-- finger
-- mobile
-- more
-- rice
-- fruit
-- chopped
-- base
-- label
-- cherry
-- microwave
-- lunch
-- bread
-- cake
-- content
-- coffee
-- baby
-- paper
-- mint
-- watch
-- black
-- take
-- chop
-- slow
-- salsa
-- knife
-- beer
-- fork
-- fire
-- national
-- drink
-- bacon
-- book
-- red
-- dust
-- towel
-- oil
-- wine
-- spoon
-- wood
-- other
-- glass
-- cover
-- ginger
-- instant
-- light
-- pitcher
-- door
-- chair
-- bowl
-- pack
-- table
-- ground
-- mix
-- salad
-- new
-- cd
-- pit
-- support
-- second
-- green
-- turkey
-- air
-- power
-- press
-- top
-- only
-- refrigerator
-- round
-- screw
-- brush
-- draw
-- apple
-- cut
-- can
+#### Cluster coherence score: 0.545
+#### Top Verbs: [('pick-up', 10), ('put', 7), ('take', 6), ('cut', 4), ('open', 3)]
+- hummus
+- rind
+- mirin
+- paneer
+- nutella
+- cling
+- pesto
+- extractor
+- saag
+- rusk
+- melba
+- blueberry
+- cumin
+- galangal
+- hob
+- leek
+- cob
+- pineapple
+- clove
+- wok
+- pith
+- sachet
+- jeera
+- melon
+
+
+## CLUSTER 10
+#### Cluster coherence score: 0.667
+#### Top Verbs: [('pick-up', 4), ('take', 2), ('put-down', 2), ('cut', 1), ('place', 1)]
+- caper
+- minced
+- mincing
+- spinach
+- scissor
+- shreddies
+- mince
+- thyme
+
+
+## CLUSTER 11
+#### Cluster coherence score: 0.51
+#### Top Verbs: [('pick-up', 6), ('take', 6), ('put', 5), ('throw', 4), ('put-down', 4)]
+- wrapper
+- dishrag
+- passata
+- dustbin
+- lasagne
+- stopper
+- tofu
+- leftover
+- trivet
+- nozzle
+- flatware
+- dishing
+- wastebasket
+- paella
+- noodle
+- cleanser
+- stirrer
+- scrubber
+- dishwater
+- sharpener
+- v60
+- slipper
+- spinker
+
+
+## CLUSTER 12
+#### Cluster coherence score: 0.8
+#### Top Verbs: [('open', 2), ('put-down', 2), ('put', 2), ('close', 1), ('take', 1)]
+- miso
+- sushi
+- moka
+- masala
+- jambalaya
+- mocha
+- soya
+- tamagoyaki
+
+
+## CLUSTER 13
+#### Cluster coherence score: 1.0
+#### Top Verbs: [('wash', 1), ('pick-up', 1), ('put-down', 1), ('rinse', 1)]
+- tablespoon
+- teaspoon
+
+
+## CLUSTER 14
+#### Cluster coherence score: 0.733
+#### Top Verbs: [('put-down', 4), ('pick-up', 2), ('put', 2), ('take', 2), ('clean', 1)]
+- mezzaluna
+- prosciutto
+- salami
+- mozzarella
+- spate
+- ciabatta
+- chorizo
+- risotto

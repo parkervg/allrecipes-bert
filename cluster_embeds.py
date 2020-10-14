@@ -24,10 +24,23 @@ noun_embeddings = convert_to_embeddings(nouns, model = model)
 X = np.array(list(noun_embeddings.values()))
 
 
-n_clusters = 10
+test_range = 20
 n_top_words = 5
-kmeans_labels = KMeans(n_clusters = n_clusters).fit_predict(X)
+results_dict = {}
+for n_clusters in range(2, test_range):
+    kmeans_labels = KMeans(n_clusters = n_clusters).fit_predict(X)
+    for i in range(n_clusters):
+        cluster_nouns = [x for ix, x in enumerate(nouns) if kmeans_labels[ix] == i]
+        epic_verbs = [get_top_epic_verbs(n, df, k = 3) for n in cluster_nouns]
+        flat_verbs = [item for sublist in epic_verbs for item in sublist]
+        verb_counts = Counter(flat_verbs)
+        if not verb_counts:
+            results_dict[i] = coherance_score == 0.0
+        else:
+            coherance_score = sum([i[1] for i in verb_counts.most_common()[:n_top_words]]) / len(flat_verbs)
+            results_dict[i] = coherance_score
 
+n_clusters = 15
 for i in range(n_clusters):
     print("CLUSTER {}".format(i))
     cluster_nouns = [x for ix, x in enumerate(nouns) if kmeans_labels[ix] == i]
