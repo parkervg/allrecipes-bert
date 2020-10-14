@@ -12,9 +12,9 @@ Notes:
 
 coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in the cluster)
 
-    ##CLUSTER 0
-    ####Cluster coherence score: 0.484
-    ####Top Verbs: [('put', 52), ('take', 34), ('open', 26), ('pick-up', 24), ('close', 19)]
+    ## CLUSTER 0
+    #### Cluster coherence score: 0.484
+    #### Top Verbs: [('put', 52), ('take', 34), ('open', 26), ('pick-up', 24), ('close', 19)]
          box
          poster
          transparent
@@ -174,9 +174,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          squash
 
 
-    ##CLUSTER 1
-    ####Cluster coherence score: 0.636
-    ####Top Verbs: [('put', 4), ('pick-up', 3), ('put-down', 3), ('cut', 2), ('take', 2)]
+    ## CLUSTER 1
+    #### Cluster coherence score: 0.636
+    #### Top Verbs: [('put', 4), ('pick-up', 3), ('put-down', 3), ('cut', 2), ('take', 2)]
          avocado
          tupperware
          mozzarella
@@ -188,9 +188,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          mezzaluna
 
 
-    ##CLUSTER 2
-    ####Cluster coherence score: 0.475
-    ####Top Verbs: [('pick-up', 7), ('put-down', 6), ('take', 6), ('put', 5), ('open', 4)]
+    ## CLUSTER 2
+    #### Cluster coherence score: 0.475
+    #### Top Verbs: [('pick-up', 7), ('put-down', 6), ('take', 6), ('put', 5), ('open', 4)]
          cooker
          presser
          toaster
@@ -216,9 +216,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          pestle
 
 
-    ##CLUSTER 3
-    ####Cluster coherence score: 0.509
-    ####Top Verbs: [('put', 51), ('pick-up', 32), ('take', 25), ('put-down', 15), ('open', 13)]
+    ## CLUSTER 3
+    #### Cluster coherence score: 0.509
+    #### Top Verbs: [('put', 51), ('pick-up', 32), ('take', 25), ('put-down', 15), ('open', 13)]
          serving
          tong
          sun
@@ -348,9 +348,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          soup
 
 
-    ##CLUSTER 4
-    ####Cluster coherence score: 0.635
-    ####Top Verbs: [('pick-up', 17), ('put', 14), ('take', 8), ('cut', 8), ('open', 7)]
+    ## CLUSTER 4
+    #### Cluster coherence score: 0.635
+    #### Top Verbs: [('pick-up', 17), ('put', 14), ('take', 8), ('cut', 8), ('open', 7)]
          tamagoyaki
          miso
          pesto
@@ -393,9 +393,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          mitt
 
 
-    ##CLUSTER 5
-    ####Cluster coherence score: 0.463
-    ####Top Verbs: [('pick-up', 12), ('put', 9), ('take', 8), ('put-down', 5), ('throw', 4)]
+    ## CLUSTER 5
+    #### Cluster coherence score: 0.463
+    #### Top Verbs: [('pick-up', 12), ('put', 9), ('take', 8), ('put-down', 5), ('throw', 4)]
          spinker
          leftover
          creme
@@ -434,9 +434,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          cling
 
 
-    ##CLUSTER 6
-    ####Cluster coherence score: 0.667
-    ####Top Verbs: [('pick-up', 8), ('put-down', 8), ('put', 5), ('take', 4), ('spray', 3)]
+    ## CLUSTER 6
+    #### Cluster coherence score: 0.667
+    #### Top Verbs: [('pick-up', 8), ('put-down', 8), ('put', 5), ('take', 4), ('spray', 3)]
          chipping
          dustpan
          ladle
@@ -465,9 +465,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          silverware
 
 
-    ##CLUSTER 7
-    ####Cluster coherence score: 0.545
-    ####Top Verbs: [('put', 4), ('open', 2), ('cut', 2), ('pour', 2), ('slice', 2)]
+    ## CLUSTER 7
+    #### Cluster coherence score: 0.545
+    #### Top Verbs: [('put', 4), ('open', 2), ('cut', 2), ('pour', 2), ('slice', 2)]
          casserole
          mayonnaise
          broccoli
@@ -479,9 +479,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          mincemeat
 
 
-    ##CLUSTER 8
-    ####Cluster coherence score: 0.661
-    ####Top Verbs: [('put', 13), ('pick-up', 12), ('take', 9), ('put-down', 5), ('pour', 2)]
+    ## CLUSTER 8
+    #### Cluster coherence score: 0.661
+    #### Top Verbs: [('put', 13), ('pick-up', 12), ('take', 9), ('put-down', 5), ('pour', 2)]
          whisk
          waffle
          caper
@@ -508,9 +508,9 @@ coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in t
          biscuit
 
 
-    ##CLUSTER 9
-    ####Cluster coherence score: 0.491
-    ####Top Verbs: [('put', 35), ('pick-up', 23), ('take', 20), ('open', 14), ('put-down', 13)]
+    ## CLUSTER 9
+    #### Cluster coherence score: 0.491
+    #### Top Verbs: [('put', 35), ('pick-up', 23), ('take', 20), ('open', 14), ('put-down', 13)]
          measure
          work
          hand
