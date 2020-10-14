@@ -22,8 +22,11 @@ Kmeans with k = 15
 
 # Clustering Results
 Embeddings were clustered with k = 15.
+
 The 'Cluster coherence score' is defined as:
-`sum(counts for 5 most common verbs) / len(all verb tokens in the cluster)`
+
+`sum(counts for 5 most common verbs) / len(all verb tokens in the cluster)`.
+
 'Top Verbs' list the 5 most frequent verbs attached to the clustered nouns in EpicKitchens and their intra-cluster frequencies.
 
 
