@@ -9,26 +9,8 @@ import operator
 from custom_logging import Blogger
 logger = Blogger()
 
-
-# config = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states = True)
-# model = TFBertModel.from_pretrained('bert-base-uncased', config = config)
-# from transformers import TFBertForMaskedLM
-# config = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states = True)
-# tuned_model = TFBertForMaskedLM.from_pretrained("models/allrecipes/checkpoint-3500", from_pt = True, config = config)
-# get_distance("cook", "steak", tuned_model, extract_embedding_small)
-# get_distance("dog", "cat", tuned_model, extract_embedding_small)
-#
-# get_distance("cook", "steak", model, extract_embedding_small)
-# get_distance("heat", "oven", model, extract_embedding_small)
-#
-# toks = convert_to_token_tensors(["tomato"])["tomato"]
-# out = tuned_model(tf.expand_dims(toks, 0))
-# out[0].shape
-# len(out[1])
-# text = ["tomato"]
-# ids = tokenizer(text, add_special_tokens = True)
-# embedding_dict = {t: tf.constant(i) for t, i in zip(text, ids["input_ids"])}
-# tensor = embedding_dict["tomato"]
+# TODO:
+# Create simple count distribution of verbs over nouns in EpicKitchen
 
 
 def extract_embedding_small(tensor: tf.Tensor, model: object) -> tf.Tensor:
