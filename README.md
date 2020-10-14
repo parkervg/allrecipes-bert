@@ -4,7 +4,7 @@ Notes:
   - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
     - Examples:
       - spices clustered together, non-food items clustered together
-      - Cluster 2 of appliances: 'take', 'put', etc. but no 'toss', 'pour', 'dice', etc.
+      - [Cluster 2](#cluster-2) of appliances: 'take', 'put', etc. but no 'toss', 'pour', 'dice', etc.
     - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
     - Maybe use SHAP with classification to extract subspace related to allowed actions
 
