@@ -6,7 +6,7 @@ Notes:
     - Examples:
       - [Cluster 14](#cluster-14): Ingredients that you can 'cut'
       - [Cluster 6](#cluster-6): Small utensils you can 'wash', 'take'
-      - [Cluster 10](#cluster-10) and [Cluster 11][#cluster-11]: Spices you can 'sprinkle', 'put' (on)
+      - [Cluster 10](#cluster-10) and [Cluster 11](#cluster-11): Spices you can 'sprinkle', 'put' (on)
       - [Cluster 13](#cluster-13): Appliances you can 'open' and 'close'
   - Issues:
     - Examples like [Cluster 3](#cluster-3): semantic genre outside of affordances
