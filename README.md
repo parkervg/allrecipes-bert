@@ -5,7 +5,7 @@ Notes:
   - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
     - Examples:
   - [Cluster 5](#cluster-5) of non-food kitchen tools: 'take', 'wash'
-  - [Cluster 9](#cluster-2): many spices
+  - [Cluster 2](#cluster-2): many spices
   - Issues:
     - Examples like [Cluster 14](#cluster-14): semantic genre outside of affordances
     - Maybe use SHAP with classification to extract subspace related to allowed actions
