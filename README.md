@@ -1,5 +1,10 @@
 BERT with a masked language model head was trained on the first 10,000 recipes in the AllRecipes dataset. The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
 
+## Usage
+- For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
+  - Example: `python3 lib/cluster_embeds.py 15 50`
+- For masked language modeling: `python3 lib/mlm.py {text} {results_length}`
+  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." 3` 
 Notes:
   - Use masked language model to disambiguate verbs not in our vocab
     - Have probability threshold required to accept it
