@@ -21,11 +21,10 @@ def cluster_embeds(n_clusters, noun_cap=None):
     train_df["base_verb"] = train_df.join(verb_classes_df.set_index("verb_id"), on="verb_class")["class_key"].tolist()
 
     BC = BertClustering(n_clusters, nouns, verbs, train_df, model_dir="models/allrecipes/checkpoint-3500")
-    BC.get_noun_embeddings()
     BC.do_clustering()
 
 
 if __name__ == "__main__":
     n_clusters = int(sys.argv[1])
-    noun_cap = sys.argv[2] if len(sys.argv) > 2 else None
+    noun_cap = int(sys.argv[2]) if len(sys.argv) > 2 else None
     cluster_embeds(n_clusters, noun_cap)
