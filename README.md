@@ -4,19 +4,22 @@ BERT with a masked language model head was trained on the first 10,000 recipes i
 - For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
   - Example: `python3 lib/cluster_embeds.py 15 50`
 - For masked language modeling: `python3 lib/mlm.py {text} {results_length}`
-  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." 3` 
-Notes:
+  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." 3`
+
+## Misc. Notes to Self
   - Use masked language model to disambiguate verbs not in our vocab
     - Have probability threshold required to accept it
   - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
   - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
-    - Examples:
-      - [Cluster 14](#cluster-14): Ingredients that you can 'cut'
-      - [Cluster 6](#cluster-6): Small utensils you can 'wash', 'take'
-      - [Cluster 10](#cluster-10) and [Cluster 11](#cluster-11): Spices you can 'sprinkle', 'put' (on)
-      - [Cluster 13](#cluster-13): Appliances you can 'open' and 'close'
+
+## Cluster Examples:
+  - [Cluster 14](#cluster-14): Ingredients that you can 'cut'
+  - [Cluster 6](#cluster-6): Small utensils you can 'wash', 'take'
+  - [Cluster 10](#cluster-10) and [Cluster 11](#cluster-11): Spices you can 'sprinkle', 'put' (on)
+  - [Cluster 13](#cluster-13): Appliances you can 'open' and 'close'
   - Issues:
     - Examples like [Cluster 3](#cluster-3): semantic genre outside of affordances
+    - Clusters like Cluster 0 are too broad, not that meaningful
     - Maybe use SHAP with classification to extract subspace related to allowed actions
 
 
