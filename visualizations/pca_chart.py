@@ -9,7 +9,7 @@ import mpld3
 config = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states = True)
 model = TFBertModel.from_pretrained('bert-base-uncased', config = config)
 
-df = pd.read_csv("example.csv")
+df = pd.read_csv("EPIC_train_action_labels.csv")
 n_verbs = 50
 n_nouns = 50
 verbs = list(set([x.split(":")[-1].replace("-", " ") for x in df.verb.tolist()]))[100: 100 + n_verbs]

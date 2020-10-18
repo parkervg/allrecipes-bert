@@ -1,14 +1,21 @@
-BERT with a masked language model head was trained on the first 10,000 recipes in the AllRecipes dataset. The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
+BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
 
 ## Usage
 - For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
   - Example: `python3 lib/cluster_embeds.py 15 50`
+  - Outputs: Logging statements of each cluster, some stats, and the nouns in each cluster.
 - For masked language modeling: `python3 lib/mlm.py {text} {results_length}`
   - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." 3`
+  - Outputs: Top k words most likely to fill in [MASK]
+- For masked language prediction: `python3 lib/mlm_prob.py {text} {word}`
+  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." "cut"`
+  - Outputs: softmax probability of target word filling in for [MASK] token.
 
 ## Misc. Notes to Self
   - Use masked language model to disambiguate verbs not in our vocab
-    - Have probability threshold required to accept it
+    - Have probability threshold required to accept it?
+    - https://arxiv.org/pdf/1904.01766v2.pdf
+      - Use structure of `now let me show you how to [MASK] the [MASK]` to extract verb/noun relations
   - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
   - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
 

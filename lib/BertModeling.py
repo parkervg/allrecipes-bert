@@ -14,15 +14,18 @@ logger = Blogger()
 
 # TODO:
 # Create simple count distribution of verbs over nouns in EpicKitchen
+# Read through https://arxiv.org/pdf/1904.01766v2.pdf
+#   - They use the framework “now let me show you how to [MASK] the [MASK]” to predict noun and verbs given a video
+#
 class BertModel():
     """
     Loads a given model for use in clustering and MLM.
     """
     def __init__(self,
-                 model_dir,  # Pre-trained/fine-tuned model directory
-                 model_name, # Existing HuggingFace model, e.g. 'bert-base-uncased'
-                 config,
-                 tokenizer
+                 model_dir: str = None,  # Pre-trained/fine-tuned model directory
+                 model_name: str = None, # Existing HuggingFace model, e.g. 'bert-base-uncased'
+                 config: object = None,
+                 tokenizer: str = None
                  ):
         self.config = config if config else BertConfig.from_pretrained('bert-base-uncased', output_hidden_states=False)
         self.tokenizer = tokenizer if tokenizer else BertTokenizer.from_pretrained('bert-base-uncased')
@@ -44,7 +47,7 @@ class BertModel():
             logger.status_update("Loading BERT model at {}...".format(self.model_dir))
             self.model = TFBertForMaskedLM.from_pretrained(self.model_dir, from_pt=True, config=self.config)
         elif self.model_name:
-            logger.log("Loading BERT model {}...".format(self.model_name))
+            logger.status_update("Loading BERT model {}...".format(self.model_name))
             self.model = TFBertForMaskedLM.from_pretrained(self.model_name, config=self.config)
         return self.model
 
@@ -57,10 +60,12 @@ class BertEmbeddings(BertModel):
                  model_name: str = None, # Existing HuggingFace model, e.g. 'bert-base-uncased'
                  config: object = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states=True), # Specify that we need hidden states
                  tokenizer: str = None,
-                 extraction_function: str = "small"
+                 extraction_function: str = "small",
+                 dims: List[int] = None # List containing the indexes of the dimensions you want to use. Default is all.
                 ):
         # Inherit from BertModel class
         BertModel.__init__(self, model_dir=model_dir, model_name=model_name, config=config, tokenizer=tokenizer)
+        self.dims = dims
         self.model = self._init_model()
         self.tokenizer = self._get_tokenizer()
 
@@ -105,7 +110,10 @@ class BertEmbeddings(BertModel):
         # output of all 12 layers in the encoder
         # each with shape (batch_size, sequence_length, 768)
         hidden_states = out[-1]
-        return tf.squeeze(tf.reduce_mean(hidden_states[-1], axis=1))
+        last_hidden_state = hidden_states[-1]
+        if self.dims:
+            last_hidden_state = np.take(last_hidden_state, self.dims, axis=2) # Only keep dims specified in self.dims
+        return tf.squeeze(tf.reduce_mean(last_hidden_state, axis=1))
 
     def extract_embedding_large(self, tensor: tf.Tensor) -> tf.Tensor:
         """
@@ -132,19 +140,21 @@ class BertClustering(BertEmbeddings):
                  nouns: List[str],
                  verbs: List[str],
                  train_df: pd.DataFrame, # DataFrame with base_noun, base_verb columns
-                 extraction_function: str = "small",
                  n_top_verbs: int = 5, # Number of verbs to list in output and take into consideration for cluster coherence score
                  model_dir: str = None,  # Pre-trained/fine-tuned model directory
                  model_name: str = None, # Existing HuggingFace model, e.g. 'bert-base-uncased'
                  config: object = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states=True), # Specify that we need hidden states
-                 tokenizer: str = None
+                 tokenizer: str = None,
+                 extraction_function: str = "small",
+                 dims: List[int] = None
                  ):
-        # Inherit from BertModel class
-        BertEmbeddings.__init__(self, model_dir=model_dir, model_name=model_name, config=config, tokenizer=tokenizer)
+        # Inherit from BertEmbeddings class
+        BertEmbeddings.__init__(self, model_dir=model_dir, model_name=model_name, config=config, tokenizer=tokenizer, dims=dims)
         self.model = self._get_model()
         self.tokenizer = self._get_tokenizer()
         self.noun_embeddings = self.convert_to_embeddings(nouns)
 
+        self.dims = dims
         self.n_clusters = n_clusters
         self.nouns = nouns
         self.verbs = verbs
@@ -176,8 +186,11 @@ class BertClustering(BertEmbeddings):
             epic_verbs = [self.get_top_epic_verbs(n) for n in cluster_nouns.values()]
             flat_verbs = [item for sublist in epic_verbs for item in sublist]
             verb_counts = Counter(flat_verbs)
-            coherance_score = sum([i[1] for i in verb_counts.most_common()[:self.n_top_verbs]]) / len(flat_verbs)
-            logger.yellow("Cluster coherence score: {}".format(round(coherance_score, 3)))
+            try:
+                coherence_score = sum([i[1] for i in verb_counts.most_common()[:self.n_top_verbs]]) / len(flat_verbs)
+            except ZeroDivisionError:
+                coherence_score = 0.0
+            logger.yellow("Cluster coherence score: {}".format(round(coherence_score, 3)))
             logger.yellow("Top Verbs: {}".format(verb_counts.most_common()[:self.n_top_verbs]))
             for n in cluster_nouns:
                 logger.log("   {}".format(n))
@@ -234,7 +247,11 @@ class BertMLM(BertModel):
         self.model = self._init_model()
         self.tokenizer = self._get_tokenizer()
 
-    def predict_mask(self, text: str, k: int = 1):
+
+    def _get_mlm_pred(self, text: str):
+        """
+        Submits masked text to Bert model and returns prediction.
+        """
         tokenized_text = self.tokenizer.tokenize(text)
         if len([tok for tok in tokenized_text if tok=='[MASK]']) > 1:
             raise ValueError("Only one token can be masked in inputted text.")
@@ -251,6 +268,13 @@ class BertMLM(BertModel):
         segments_tensors = tf.convert_to_tensor([segments_ids])
 
         pred = self.model(tokens_tensors, segments_tensors)
+        return pred, masked_index
+
+    def predict_mask(self, text: str, k: int = 1):
+        """
+        Predicts k words most likely to fit into the [MASK] of an inputted text.
+        """
+        pred, masked_index = self._get_mlm_pred(text)
         if k == 1:
             predicted_index = tf.argmax(pred[0][0][masked_index])
             predicted_token = self.tokenizer.convert_ids_to_tokens([predicted_index])[0]
@@ -259,6 +283,20 @@ class BertMLM(BertModel):
             predicted_indices = tf.nn.top_k(pred[0][0][masked_index], k=k, sorted=True).indices
             predicted_tokens = [self.tokenizer.convert_ids_to_tokens([predicted_index])[0] for predicted_index in predicted_indices]
             return predicted_tokens
+
+    def predict_mask_prob(self, text: str, word: str):
+        """
+        Performs softmax on the prediction array, returning the "probability" that the
+        variable word appears in [MASK].
+        """
+        pred, masked_index = self._get_mlm_pred(text)
+        tokenized_target_word = self.tokenizer.tokenize(word)
+        if len(tokenized_target_word) > 1:
+            raise ValueError("The target word is comprised of more than one tokens: {}".format(tokenized_target_word))
+        target_word_index = self.tokenizer.convert_tokens_to_ids(tokenized_target_word)[0]
+        softmax_probs = tf.nn.softmax(pred[0][0][masked_index], axis=0) # So that the number can be interpreted as a probability
+        return softmax_probs[target_word_index].numpy()
+
 
 # Issues:
 # Polysemy of a word like 'foil'

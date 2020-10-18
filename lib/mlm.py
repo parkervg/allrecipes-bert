@@ -1,12 +1,17 @@
 import sys
 sys.path.append('tools/')
+import os
 from BertModeling import BertMLM
 from custom_logging import Blogger
 logger = Blogger()
 
 
 def masked_language_predict(text, k=None):
-    BMLM = BertMLM(model_dir="models/allrecipes/checkpoint-3500")
+    if os.path.exists("models/allrecipes_plus_youcookii"):
+        BMLM = BertMLM(model_dir="models/allrecipes_plus_youcookii")
+    else:
+        logger.red("Can't find fine-tuned model at models/allrecipes_plus_youcookii. Using generic bert-base-uncased from HuggingFace instead.")
+        BMLM = BertMLM(model_name="bert-base-uncased")
     while True:
         if not text:
             print()
