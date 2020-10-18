@@ -1,4 +1,6 @@
-BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
+BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The unlabelled dataset was created in the script [fine-tune](training/fine-tune.py) by combining [allrecipes.json](data/allrecipes.json) with the annotations in [youucookii_annotations_trainval.json](data/youucookii_annotations_trainval.jsonn).
+
+The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
 
 ## Usage
 - For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
