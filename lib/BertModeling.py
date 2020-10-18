@@ -13,7 +13,6 @@ from custom_logging import Blogger
 logger = Blogger()
 
 # TODO:
-# Create simple count distribution of verbs over nouns in EpicKitchen
 # Read through https://arxiv.org/pdf/1904.01766v2.pdf
 #   - They use the framework “now let me show you how to [MASK] the [MASK]” to predict noun and verbs given a video
 #

@@ -11,6 +11,21 @@ BERT with a masked language model head was trained on ~20,000 recipes from the A
   - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." "cut"`
   - Outputs: softmax probability of target word filling in for [MASK] token.
 
+## Co-occurrence Table
+The full co-occurrence table can be found [here](visualizations/co-occurrence.csv).
+Below is an excerpt from the larger csv:
+|  |pan|pan:dust|tap|plate|knife|bowl|spoon|cupboard|
+|--------|---|--------|---|-----|-----|----|-----|--------|
+|take    |219|2       |0  |402  |312  |202 |360  |9       |
+|put     |260|1       |3  |403  |302  |224 |323  |6       |
+|open    |4  |0       |347|1    |1    |5   |0    |636     |
+|close   |5  |0       |275|0    |0    |3   |0    |381     |
+|wash    |223|0       |7  |263  |219  |128 |187  |1       |
+|cut     |0  |0       |0  |2    |1    |0   |0    |0       |
+|mix     |91 |0       |0  |0    |1    |3   |8    |0       |
+|pour    |3  |1       |0  |3    |0    |2   |1    |2       |
+
+
 ## Misc. Notes to Self
   - Use masked language model to disambiguate verbs not in our vocab
     - Have probability threshold required to accept it?

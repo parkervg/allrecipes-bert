@@ -1,5 +1,6 @@
 import sys
 sys.path.append('tools/')
+import os
 from BertModeling import BertMLM
 from custom_logging import Blogger
 logger = Blogger()
