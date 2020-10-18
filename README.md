@@ -33,6 +33,11 @@ Below is an excerpt from the larger csv:
       - Use structure of `now let me show you how to [MASK] the [MASK]` to extract verb/noun relations
   - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
   - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
+  - Fine-tuned BERT produces clusters with lower 'cluster coherence' scores, but much more relevant masked model predictions
+    - Specifically: standard `bert-base-uncased` LM is better at clustering appliances vs. non-appliances
+    - Domain-specific recipe text likely brings these embeddings closer due to the more-frequent co-occurrence, as opposed to Wikipedia data
+    - Unlike with the MLM, we don't provide clustering task with a specific semantic relationship (i.e. similar verbs) to use.
+
 
 ## Cluster Examples:
   - [Cluster 14](#cluster-14): Ingredients that you can 'cut'

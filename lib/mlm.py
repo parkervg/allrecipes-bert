@@ -23,9 +23,10 @@ def masked_language_predict(text, k=None):
         text = None
 
 if __name__ == "__main__":
-    text = sys.argv[1]
-    if len(sys.argv) > 2:
-        k = int(sys.argv[2])
-        masked_language_predict(text, k)
+    if len(sys.argv) > 1:
+        text = sys.argv[1]
+        k = int(sys.argv[2]) if len(sys.argv) > 2 else None
     else:
-        masked_language_predict(text)
+        text = None
+        k = None
+    masked_language_predict(text, k)

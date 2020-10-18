@@ -15,11 +15,16 @@ def masked_language_predict_prob(text, word):
     while True:
         if not text:
             print()
-            text = input("Input: ")
+            text = input("Input text: ")
+            word = input("Input word: ")
         logger.status_update(BMLM.predict_mask_prob(text, word))
         text = None
 
 if __name__ == "__main__":
-    text = sys.argv[1]
-    word = sys.argv[2]
+    if len(sys.argv) > 1:
+        text = sys.argv[1]
+        word = sys.argv[2]
+    else:
+        text = None
+        word = None
     masked_language_predict_prob(text, word)
