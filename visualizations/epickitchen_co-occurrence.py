@@ -37,10 +37,10 @@ ax = sns.heatmap(data = df_chunk_1,
                  cmap = cmap,
                  linecolor='black',
                  linewidths=.01)
-ax.text(20, -4, "Verb/Noun Co-Occurrences in EpicKitchen", fontsize = 22, weight='bold')
+ax.text(20, -4, "Verb/Noun Co-Occurrences in EpicKitchen", fontsize = 24, weight='bold')
 #ax.text(37, -6, "'now let me show you how to [MASK] the [MASK].'", fontsize = 13, style='italic')
 # Set ticks to all sides
-ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0, labelsize=14)
+ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0, labelsize=16)
 #Rotate X ticks
 plt.xticks(rotation='vertical')
 #plt.show()
