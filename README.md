@@ -14,7 +14,7 @@ The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered w
   - Outputs: softmax probability of target word filling in for [MASK] token.
 
 ## Co-occurrence Table
-The full co-occurrence table can be found [here](visualizations/co-occurrence.csv).
+The full co-occurrence table can be found [here](data/epickitchen_co-occurrence.csv).
 Below is an excerpt from the larger csv:
 |  |pan|pan:dust|tap|plate|knife|bowl|spoon|cupboard|
 |--------|---|--------|---|-----|-----|----|-----|--------|
@@ -27,6 +27,7 @@ Below is an excerpt from the larger csv:
 |mix     |91 |0       |0  |0    |1    |3   |8    |0       |
 |pour    |3  |1       |0  |3    |0    |2   |1    |2       |
 
+The BERT probability co-occurence table can be found [here](data/bert_co-occurrence.csv).
 
 ### Heatmaps
 Below are heatmaps displaying a small sample of all the verb and noun co-occurences both in EpicKitchen, and extracted using BERT with a masked language model head. For the BERT heatmap, a noun/verbs softmax probability was obtained by averaging the output of the sentence `now let me show you how to [MASK] the [MASK]`, where the `[MASK]` token probabilities were predicted for the verb and noun, respectively.
