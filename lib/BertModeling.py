@@ -4,6 +4,7 @@ import sys
 sys.path.append('tools/')
 from typing import (Iterable, Dict, Any, Tuple, List, Sequence, Generator, Callable)
 from collections import Counter
+import statistics
 from transformers import BertTokenizer, BertConfig, TFBertForMaskedLM
 import tensorflow as tf
 import pandas as pd
@@ -252,13 +253,13 @@ class BertMLM(BertModel):
         Submits masked text to Bert model and returns prediction.
         """
         tokenized_text = self.tokenizer.tokenize(text)
-        if len([tok for tok in tokenized_text if tok=='[MASK]']) > 1:
-            raise ValueError("Only one token can be masked in inputted text.")
+        # if len([tok for tok in tokenized_text if tok=='[MASK]']) > 1:
+        #     raise ValueError("Only one token can be masked in inputted text.")
         if tokenized_text[0] != "[CLS]":
             tokenized_text.insert(0, "[CLS]")
         if tokenized_text[-1] != "[SEP]":
             tokenized_text.append("[SEP]")
-        masked_index = tokenized_text.index('[MASK]')
+        masked_indices = [ix for ix, tok in enumerate(tokenized_text) if tok == "[MASK]"]
 
         indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_text)
         segments_ids = [0] * len(tokenized_text)
@@ -267,7 +268,7 @@ class BertMLM(BertModel):
         segments_tensors = tf.convert_to_tensor([segments_ids])
 
         pred = self.model(tokens_tensors, segments_tensors)
-        return pred, masked_index
+        return pred, masked_indices
 
     def predict_mask(self, text: str, k: int = 1):
         """
@@ -288,14 +289,26 @@ class BertMLM(BertModel):
         Performs softmax on the prediction array, returning the "probability" that the
         variable word appears in [MASK].
         """
-        pred, masked_index = self._get_mlm_pred(text)
         tokenized_target_word = self.tokenizer.tokenize(word)
         if len(tokenized_target_word) > 1:
-            raise ValueError("The target word is comprised of more than one tokens: {}".format(tokenized_target_word))
-        target_word_index = self.tokenizer.convert_tokens_to_ids(tokenized_target_word)[0]
-        softmax_probs = tf.nn.softmax(pred[0][0][masked_index], axis=0) # So that the number can be interpreted as a probability
-        return softmax_probs[target_word_index].numpy()
-
+            tokenized_text = self.tokenizer.tokenize(text)
+            masked_index = tokenized_text.index("[MASK]")
+            # Add in necessary [MASK] tokens
+            for _ in range(len(tokenized_target_word) - 1):
+                tokenized_text.insert(masked_index, "[MASK]")
+            text = self.tokenizer.convert_tokens_to_string(tokenized_text)
+            pred, masked_indices = self._get_mlm_pred(text)
+            target_word_indices = self.tokenizer.convert_tokens_to_ids(tokenized_target_word)
+            all_probs = []
+            for ix, (masked_index, target_word_index) in enumerate(zip(masked_indices, target_word_indices)):
+                softmax_probs = tf.nn.softmax(pred[0][0][masked_index], axis=0) # So that the number can be interpreted as a probability
+                all_probs.append(softmax_probs[target_word_index].numpy())
+            return statistics.mean(all_probs)
+        else:
+            pred, masked_indices = self._get_mlm_pred(text)
+            target_word_index = self.tokenizer.convert_tokens_to_ids(tokenized_target_word)[0]
+            softmax_probs = tf.nn.softmax(pred[0][0][masked_indices[0]], axis=0) # So that the number can be interpreted as a probability
+            return softmax_probs[target_word_index].numpy()
 
 # Issues:
 # Polysemy of a word like 'foil'

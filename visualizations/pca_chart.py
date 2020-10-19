@@ -4,7 +4,10 @@ import numpy as np
 from transformers import BertTokenizer, TFBertModel, BertConfig, BertModel
 from sklearn.decomposition import PCA
 import matplotlib.pylab as plt
-import mpld3
+"""
+This wasn't super helpful in understanding the data. 
+"""
+
 
 config = BertConfig.from_pretrained('bert-base-uncased', output_hidden_states = True)
 model = TFBertModel.from_pretrained('bert-base-uncased', config = config)
@@ -44,4 +47,3 @@ for i in range(n_verbs, n_verbs + n_nouns):
 ax.set_xlim(-2, 0)
 for i, txt in enumerate(text):
     plt.annotate(txt, (pca_X[:, 0][i], pca_X[:, 1][i]))
-mpld3.display(fig)
