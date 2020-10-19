@@ -25,6 +25,7 @@ def calculate_epickitchen_cooccurrences():
 
 df = pd.read_csv("data/epickitchen_co-occurrence.csv", index_col=0)
 max_count = max(df.max().tolist())
+
 # Heatmap time
 df_chunk_1 = df[:50][df.columns[:75]]
 cmap = sns.light_palette((260, 75, 60), input="husl", n_colors = 20)
@@ -39,7 +40,7 @@ ax = sns.heatmap(data = df_chunk_1,
 ax.text(30, -6, "Verb/Noun Co-Occurrences in EpicKitchem", fontsize = 20, weight='bold')
 #ax.text(37, -6, "'now let me show you how to [MASK] the [MASK].'", fontsize = 13, style='italic')
 # Set ticks to all sides
-ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0)
+ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0, labelsize=14)
 #Rotate X ticks
 plt.xticks(rotation='vertical')
 #plt.show()

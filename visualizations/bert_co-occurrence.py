@@ -57,6 +57,7 @@ def calculate_bert_cooccurrences():
 
 df = pd.read_csv("data/bert_co-occurrence.csv", index_col=0)
 max_softmax = max(df.max().tolist())
+
 df_chunk_1 = df[:50][df.columns[:75]]
 cmap = sns.light_palette((260, 75, 60), input="husl", n_colors = 20)
 dimensions = (40, 25)
@@ -68,9 +69,8 @@ ax = sns.heatmap(data = df_chunk_1,
                  linecolor='black',
                  linewidths=.01)
 ax.text(30, -8, "Average Softmax across Verb/Noun Co-Occurence", fontsize = 20, weight='bold')
-ax.text(34, -6, "'now let me show you how to [MASK] the [MASK].'", fontsize = 13, style='italic')
-# Set ticks to all sides
-ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0)
+ax.text(34, -6, "'now let me show you how to [MASK] the [MASK].'", fontsize = 13, style='italic')# Set ticks to all sides
+ax.tick_params(right=True, top=True, labelright=True, labeltop=True, rotation=0, labelsize=14)
 #Rotate X ticks
 plt.xticks(rotation='vertical')
 #plt.show()
