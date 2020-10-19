@@ -32,8 +32,8 @@ The BERT probability co-occurence table can be found [here](data/bert_co-occurre
 ### Heatmaps
 Below are heatmaps displaying a small sample of all the verb and noun co-occurences both in EpicKitchen, and extracted using BERT with a masked language model head. For the BERT heatmap, a noun/verbs softmax probability was obtained by averaging the output of the sentence `now let me show you how to [MASK] the [MASK]`, where the `[MASK]` token probabilities were predicted for the verb and noun, respectively.
 
-![EpicKitchen Heatmap](visualizations/epickitchen_co-occurence.png?raw=true)
-![Bert Heatmap](visualizations/bert_co-occurence.png?raw=true)
+![EpicKitchen Heatmap](visualizations/epickitchen_co-occurence_small1.png?raw=true)
+![Bert Heatmap](visualizations/bert_co-occurence_small1.png?raw=true)
 
 ## Misc. Notes to Self
   - Use masked language model to disambiguate verbs not in our vocab
