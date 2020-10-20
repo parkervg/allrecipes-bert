@@ -1,4 +1,4 @@
-BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The unlabelled dataset was created in the script [fine-tune.py](training/fine-tune.py) by combining [allrecipes.json](data/allrecipes.json) with the annotations in [youucookii_annotations_trainval.json](data/youucookii_annotations_trainval.jsonn).
+BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The unlabelled dataset was created in the script [fine-tune.py](training/fine-tune.py) by combining [allrecipes.json](data/allrecipes.json) with the annotations in [youucookii_annotations_trainval.json](data/youucookii_annotations_trainval.json).
 
 The co-occurence table of softmax probabilities found at [bert_co-occurrence.csv](data/bert_co-occurrence.csv) was then clustered using KMeans. All the nouns in `EPIC_noun_classes.csv` and all the verbs in `EPIC_train_action_labels.csv` are accounted for.
 
