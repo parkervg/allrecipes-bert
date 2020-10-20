@@ -1,6 +1,8 @@
 BERT with a masked language model head was trained on ~20,000 recipes from the AllRecipes dataset and YouCook II video annotations. The unlabelled dataset was created in the script [fine-tune.py](training/fine-tune.py) by combining [allrecipes.json](data/allrecipes.json) with the annotations in [youucookii_annotations_trainval.json](data/youucookii_annotations_trainval.jsonn).
 
-The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered with KMeans and annotated with the most frequently accompanying verbs in `EPIC_train_action_labels.csv`.
+The co-occurence table of softmax probabilities found at [bert_co-occurrence.csv](data/bert_co-occurrence.csv) was then clustered using KMeans. All the nouns in `EPIC_noun_classes.csv` and all the verbs in `EPIC_train_action_labels.csv` are accounted for.
+
+To produce the table at [bert_co-occurrence.csv](data/bert_co-occurrence.csv), for each verb `X` and each noun `Y`, the average of a Bert MLM prediction for both `now let me show you how to X the [MASK]` and `now let me show you how to [MASK] the Y` were found.
 
 ## Usage
 - For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
@@ -13,7 +15,7 @@ The embeddings of all the nouns in `EPIC_noun_classes.csv` were then clustered w
   - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." "cut"`
   - Outputs: softmax probability of target word filling in for [MASK] token.
 
-## Co-occurrence Table
+## EpicKitchen Co-occurrence Table
 The full co-occurrence table can be found [here](data/epickitchen_co-occurrence.csv).
 Below is an excerpt from the larger csv:
 |  |pan|pan:dust|tap|plate|knife|bowl|spoon|cupboard|
@@ -75,396 +77,426 @@ The 'Cluster coherence score' is defined as:
 
 
 ## CLUSTER 0
-#### Cluster coherence score: 0.667
-#### Top Verbs: [('put', 28), ('take', 26), ('wash', 11), ('cut', 7), ('pour', 6)]
-- butter
-- light
-- oil
+#### Cluster coherence score: 0.478
+#### Top Verbs: [('remove', 3), ('turn', 2), ('take', 2), ('put', 2), ('move', 2)]
 - handle
-- salad
-- finger
-- bowl
-- chair
-- paper
-- watch
-- rice
-- fork
-- bacon
-- power
+- stereo
+- napkin
+- ladder
 - towel
-- heat
-- spoon
-- coconut
-- brush
-- cover
-- chicken
-- time
-- banana
-- hand
-- cake
-- ginger
-- fire
-- cd
-- beer
-- apple
-- salt
-- fruit
-- knife
-- microwave
-- drink
-- garlic
-- basil
-- cherry
-- dust
-- coffee
-- water
+- finger
+- chair
+- sticker
 
 
 ## CLUSTER 1
-#### Cluster coherence score: 1.0
-#### Top Verbs: [('put', 4), ('take', 4), ('remove', 1), ('wash', 1), ('fold', 1)]
-- plastic wrap
-- ladle
-- tablecloth
-- whisk
+#### Cluster coherence score: 0.572
+#### Top Verbs: [('put', 101), ('take', 97), ('cut', 32), ('open', 31), ('pour', 30)]
+- tortilla
+- spice
+- coffee
+- egg
+- shell:egg
+- waffle
+- coriander
+- crisp
+- heart
+- cereal
+- tofu
+- cream
+- top
+- berry
+- mayonnaise
+- breadcrumb
+- pan
+- sugar
+- grass:lemon
+- honey
+- milk
+- thyme
+- biscuit
+- alarm
+- smoothie
+- herb
+- shirt
+- soap
+- hob
+- lettuce
+- almond
+- syrup
+- ketchup
+- cake
+- powder:coconut
+- corn
+- cover
+- pie
+- cucumber
+- tea
+- tarragon
+- oatmeal
+- banana
+- leaf:mint
+- cherry
+- squash
+- turmeric
+- apple
+- dust
+- pepper
+- pineapple
+- flour
+- pith
+- bar:cereal
+- flame
+- mocha
+- rim
+- hummus
+- sandwich
+- switch
+- risotto
+- garni:bouquet
+- cinnamon
+- powder:washing
+- bread
+- nut:pine
+- ginger
+- butter
+- mesh
+- flake:chilli
+- salt
+- jambalaya
+- pancake
+- casserole
+- pear
+- base
+- lemon
+- melon
+- fruit
+- croissant
+- skin
+- mustard
+- kettle
+- tail
+- avocado
+- pesto
+- leaf
+- boiler
+- yeast
+- wrap
+- aubergine
+- coconut
+- blueberry
+- popcorn
+- vinegar
+- potato
+- fishcakes
+- raisin
+- cumin
+- oregano
+- foil
+- parsley
+- chocolate
+- seed
+- part
+- peach
+- rubber
+- rest
+- ring:onion
+- tahini
+- pepper:cayenne
+- sprout
+- grape
+- chilli
+- yoghurt
+- mouse
+- ingredient
+- paste:garlic
+- cloth
+- basil
+- content
+- mint
+- butter:peanut
+- cheese
+- lead
+- omelette
+- rosemary
+- carrot
+- oat
+- asparagus
+- timer
+- wine
+- trousers
 
 
 ## CLUSTER 2
-#### Cluster coherence score: 0.778
-#### Top Verbs: [('take', 8), ('put', 6), ('cut', 4), ('scoop', 2), ('dry', 1)]
-- waffle
-- caper
-- salami
-- risotto
-- omelette
-- bouquet garni
-- kiwi
-- aubergine
-- courgette
-- pancake
+#### Cluster coherence score: 0.902
+#### Top Verbs: [('put', 9), ('take', 9), ('open', 8), ('close', 7), ('wash', 4)]
+- jar
+- door:kitchen
+- bottle
+- drawer
+- package
+- envelope
+- container
+- lid
+- book
+- box
+- window
+- capsule
 
 
 ## CLUSTER 3
-#### Cluster coherence score: 0.917
-#### Top Verbs: [('take', 3), ('open', 3), ('put', 3), ('squeeze', 1), ('close', 1)]
-- casserole
-- gravy
-- ketchup
-- mayonnaise
-- pepper shaker
+#### Cluster coherence score: 0.681
+#### Top Verbs: [('put', 20), ('take', 19), ('wash', 13), ('dry', 6), ('move', 4)]
+- knife
+- trouser
+- opener:bottle
+- spatula
+- brush
+- masher
+- shaker:pepper
+- backpack
+- whetstone
+- holder:filter
+- grater
+- squeezer:lime
+- phone
+- control:remote
+- fork
+- juicer:lime
+- chopstick
+- hand
+- utensil
+- presser
+- tap
+- peeler:potato
+- remover:spot
+- filter
+- tablet
 
 
 ## CLUSTER 4
-#### Cluster coherence score: 0.797
-#### Top Verbs: [('take', 18), ('put', 17), ('wash', 11), ('turn-on', 3), ('open', 2)]
-- chopping board
-- grinder
-- pestle
-- extractor fan
-- blender
-- utensil
-- lime squeezer
-- toaster
-- remote control
-- trouser
-- spatula
-- potato peeler
-- cutlery
-- rolling pin
-- tongs
-- presser
-- grater
-- masher
-- sticker
-- lime juicer
-- slicer
-- food processor
-- strainer
-- spot remover
+#### Cluster coherence score: 0.658
+#### Top Verbs: [('put', 14), ('take', 11), ('wash', 9), ('move', 9), ('dry', 5)]
+- floor
+- desk
+- shelf
+- scale
+- sheets
+- table
+- tray
+- light
+- grill
+- rack:drying
+- tablecloth
+- spot
+- wall
+- rug
+- plate
+- stand
+- wire
+- paper
+- board:chopping
+- mat
 
 
 ## CLUSTER 5
-#### Cluster coherence score: 0.664
-#### Top Verbs: [('take', 57), ('put', 54), ('wash', 14), ('cut', 10), ('open', 9)]
-- envelope
-- roll
-- peach
-- fridge
-- cream
-- chip
-- cup
-- rest
-- can
-- sugar
-- phone
-- plate
-- top
-- cloth
-- base
-- curry
-- table
-- sink
-- milk
-- egg
-- button
-- napkin
-- tomato
-- book
-- bread
-- kitchen
-- label
-- tea
-- jar
-- heart
-- skin
-- stock
-- grill
-- wall
-- pizza
-- carrot
-- lead
-- pepper
-- mint
-- tray
-- air
-- flour
-- fish
-- crisp
-- seed
-- pot
-- alarm
-- wine
-- cereal
-- flame
-- corn
-- bag
-- part
-- window
-- meat
-- soap
-- pie
-- juice
-- content
-- tablet
-- lemon
-- cheese
-- wrap
-- berry
-- tap
-- chocolate
-- tuna
-- switch
-- soup
-- turkey
-- glass
-- lime
-- apron
-- potato
-- pasta
-- form
-- onion
-- honey
-- support
+#### Cluster coherence score: 1.0
+#### Top Verbs: [('take', 1), ('put', 1), ('wash', 1), ('use', 1), ('turn', 1)]
+- tongs
 
 
 ## CLUSTER 6
-#### Cluster coherence score: 0.781
-#### Top Verbs: [('put', 9), ('take', 9), ('wash', 5), ('remove', 1), ('pour', 1)]
-- oven glove
-- colander
-- coffee maker
-- filter holder
-- dust pan
-- washing powder
-- drying rack
-- washing liquid
-- rinse
-- kitchen towel
-- soap dish
-- washing machine
+#### Cluster coherence score: 1.0
+#### Top Verbs: [('press', 1)]
+- button
 
 
 ## CLUSTER 7
-#### Cluster coherence score: 0.682
-#### Top Verbs: [('take', 54), ('put', 52), ('wash', 16), ('open', 14), ('close', 10)]
-- wire
-- funnel
-- pan
-- liquid
-- lid
-- vegetable
-- leaf
-- plug
-- filter
-- cabbage
-- rosemary
-- tube
-- sock
-- grape
-- oven
-- sponge
-- dough
-- squash
-- cap
-- spice
-- vinegar
-- mesh
-- candle
-- lamp
-- rubbish
-- container
-- olive
-- rim
-- desk
-- bottle
-- cork
-- pear
-- scrap
-- cinnamon
-- scissors
-- sandwich
-- clip
-- syrup
-- bin
-- rubber
-- sleeve
-- jug
-- yeast
-- mat
-- knob
-- drawer
-- beef
-- floor
-- ladder
-- poster
-- herb
-- rug
-- boxer
-- pea
-- tail
-- sausage
-- straw
-- package
-- mustard
-- instruction
-- clothes
-- almond
-- foil
-- salmon
-- lighter
-- shelf
-- timer
-- sauce
-- kettle
-- scale
-- mixture
-- sheets
-- mushroom
+#### Cluster coherence score: 0.667
+#### Top Verbs: [('put', 7), ('take', 7), ('mix', 5), ('open', 3), ('look', 2)]
 - recipe
-- shirt
-- basket
-- tissue
-- coke
-- ingredient
-- box
-- cupboard
+- soup
+- gravy
+- kitchen
 - food
+- mixture
+- salad
+- dressing:salad
+- sauce
 
 
 ## CLUSTER 8
-#### Cluster coherence score: 0.741
-#### Top Verbs: [('put', 8), ('take', 7), ('cut', 2), ('open', 2), ('water', 1)]
-- sushi mat
-- spring onion
-- onion ring
-- salad dressing
-- oat
-- spinach
-- parsley
-- tuna burger
-- garlic paste
+#### Cluster coherence score: 0.707
+#### Top Verbs: [('take', 10), ('put', 9), ('cut', 5), ('mix', 3), ('pour', 2)]
+- salmon
+- beef
+- noodle
+- fish
+- shrimp
+- pasta
+- sausage
+- chicken
+- bacon
+- tuna
+- turkey
 
 
 ## CLUSTER 9
-#### Cluster coherence score: 0.688
-#### Top Verbs: [('put', 24), ('take', 22), ('cut', 8), ('pour', 5), ('wash', 5)]
-- leftover
-- screw driver
-- cereal bar
-- noodle
-- thyme
-- whetstone
-- blueberry
-- lemon grass
-- pith
-- green bean
-- hummus
-- hob
-- nesquik
-- pineapple
-- pesto
-- crab stick
-- egg shell
-- chopstick
-- raisin
-- smoothie
-- melon
-- biscuit
-- yoghurt
-- tofu
-- paella
-- sprout
-- mint leaf
-- nutella
-- bottle opener
-- leek
-- cumin
-- slipper
-- pine nut
-- dumpling
+#### Cluster coherence score: 0.7
+#### Top Verbs: [('take', 2), ('put', 2), ('roll', 1), ('knead', 1), ('cut', 1)]
+- ball
+- dough
+- roll
 
 
 ## CLUSTER 10
-#### Cluster coherence score: 0.889
-#### Top Verbs: [('put', 3), ('take', 2), ('pour', 1), ('close', 1), ('cut', 1)]
-- chilli flake
-- chilli
-- paprika
+#### Cluster coherence score: 0.558
+#### Top Verbs: [('take', 43), ('put', 40), ('wash', 18), ('open', 15), ('close', 14)]
+- boxer
+- basket
+- supplement
+- slicer
+- cup
+- lime
+- cap
+- drink
+- poster
+- liquid
+- water
+- freezer
+- mat:sushi
+- air
+- clip
+- juice
+- pan:dust
+- nesquik
+- stick:crab
+- tab
+- driver:screw
+- microwave
+- sink
+- candle
+- sponge
+- clothes
+- ladle
+- toaster
+- wrap:plastic
+- olive
+- leftover
+- heater
+- machine:washing
+- tube
+- muffin
+- liquid:washing
+- leek
+- cork
+- glass
+- apron
+- time
+- caper
+- quorn
+- hat
+- form
+- can
+- oven
+- artichoke
+- cd
+- oil
+- tissue
+- fridge
+- dish:soap
+- rubbish
+- bag
+- beer
+- lamp
+- funnel
+- bowl
+- whisk
+- bin
+- stock
+- cupboard
+- sleeve
+- scrap
+- heat
+- sock
 
 
 ## CLUSTER 11
-#### Cluster coherence score: 0.857
-#### Top Verbs: [('take', 5), ('put', 4), ('sprinkle', 1), ('open', 1), ('close', 1)]
-- oregano
-- coconut powder
-- turmeric
-- coriander
-- cayenne pepper
+#### Cluster coherence score: 0.667
+#### Top Verbs: [('put', 25), ('take', 23), ('cut', 13), ('wash', 10), ('mix', 9)]
+- celery
+- tomato
+- courgette
+- broccoli
+- cabbage
+- garlic
+- spinach
+- fire
+- pizza
+- pea
+- dumpling
+- vegetable
+- onion
+- onion:spring
+- bean:green
+- pot
+- nutella
+- kiwi
+- cooker:slow
+- kale
+- curry
+- paella
+- mushroom
+- burger:tuna
+- rice
+- meat
+- salami
 
 
 ## CLUSTER 12
 #### Cluster coherence score: 1.0
-#### Top Verbs: [('put', 2), ('take', 2), ('flip', 1), ('open', 1), ('serve', 1)]
-- tortilla
-- mocha
-- jambalaya
+#### Top Verbs: [('turn', 1), ('turn-off', 1)]
+- knob
 
 
 ## CLUSTER 13
-#### Cluster coherence score: 0.833
-#### Top Verbs: [('put', 3), ('insert', 2), ('open', 2), ('close', 2), ('move', 1)]
-- slow cooker
-- heater
-- dishwasher
-- freezer
+#### Cluster coherence score: 1.0
+#### Top Verbs: [('attach', 1), ('put', 1), ('take', 1), ('pull', 1), ('move', 1)]
+- plug
 
 
 ## CLUSTER 14
-#### Cluster coherence score: 0.938
-#### Top Verbs: [('cut', 5), ('take', 4), ('put', 4), ('measure', 1), ('pour', 1)]
-- celery
-- cucumber
-- breadcrumb
-- lettuce
-- broccoli
-- avocado
+#### Cluster coherence score: 0.608
+#### Top Verbs: [('put', 19), ('take', 17), ('wash', 12), ('remove', 7), ('move', 7)]
+- processor:food
+- chip
+- power
+- mortar
+- jug
+- straw
+- glove:oven
+- spoon
+- support
+- cutlery
+- instruction
+- paprika
+- dishwasher
+- pin:rolling
+- pestle
+- slipper
+- label
+- coke
+- watch
+- fan:extractor
+- guard:hand
+- grinder
+- rinse
+- maker:coffee
+- colander
+- cutter:pizza
+- blender
+- lighter
+- scissors
+- strainer
+- alcohol
+- towel:kitchen

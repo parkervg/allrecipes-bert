@@ -5,7 +5,7 @@ from transformers import BertTokenizer, TFBertModel, BertConfig, BertModel
 from sklearn.decomposition import PCA
 import matplotlib.pylab as plt
 """
-This wasn't super helpful in understanding the data. 
+This wasn't super helpful in understanding the data.
 """
 
 
