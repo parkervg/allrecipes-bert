@@ -2,7 +2,7 @@ BERT with a masked language model head was trained on ~20,000 recipes from the A
 
 The co-occurence table of softmax probabilities found at [bert_co-occurrence.csv](data/bert_co-occurrence.csv) was then clustered using KMeans. All the nouns in `EPIC_noun_classes.csv` and all the verbs in `EPIC_train_action_labels.csv` are accounted for.
 
-To produce the table at [bert_co-occurrence.csv](data/bert_co-occurrence.csv), for each verb `X` and each noun `Y`, the average of a Bert MLM prediction for both `now let me show you how to X the [MASK]` and `now let me show you how to [MASK] the Y` were found.
+To produce the table at [bert_co-occurrence.csv](data/bert_co-occurrence.csv), for each verb `X` and each noun `Y`, the average of a Bert MLM prediction for both `"now let me show you how to X the [MASK]."` and `"now let me show you how to [MASK] the Y."` were found.
 
 ## Usage
 - For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
@@ -32,34 +32,17 @@ Below is an excerpt from the larger csv:
 The BERT probability co-occurence table can be found [here](data/bert_co-occurrence.csv).
 
 ### Heatmaps
-Below are heatmaps displaying a small sample of all the verb and noun co-occurences both in EpicKitchen, and extracted using BERT with a masked language model head. For the BERT heatmap, a noun/verbs softmax probability was obtained by averaging the output of the sentence `now let me show you how to [MASK] the [MASK]`, where the `[MASK]` token probabilities were predicted for the verb and noun, respectively.
+Below are heatmaps displaying a small sample of all the verb and noun co-occurences both in EpicKitchen, and extracted using BERT with a masked language model head. For the BERT heatmap, a noun/verbs softmax probability was obtained by averaging the output of the sentence `"now let me show you how to [MASK] the [MASK]."`, where the `[MASK]` token probabilities were predicted for the verb and noun, respectively.
 
 ![EpicKitchen Heatmap](visualizations/epickitchen_co-occurence_small1.png?raw=true)
 ![Bert Heatmap](visualizations/bert_co-occurence_small1.png?raw=true)
 
-## Misc. Notes to Self
-  - Use masked language model to disambiguate verbs not in our vocab
-    - Have probability threshold required to accept it?
-    - https://arxiv.org/pdf/1904.01766v2.pdf
-      - Use structure of `now let me show you how to [MASK] the [MASK]` to extract verb/noun relations
-  - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
-  - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
-  - Fine-tuned BERT produces clusters with lower 'cluster coherence' scores, but much more relevant masked model predictions
-    - Specifically: standard `bert-base-uncased` LM is better at clustering appliances vs. non-appliances
-    - Domain-specific recipe text likely brings these embeddings closer due to the more-frequent co-occurrence, as opposed to Wikipedia data
-    - Unlike with the MLM, we don't provide clustering task with a specific semantic relationship (i.e. similar verbs) to use.
-
 
 ## Cluster Examples:
-  - [Cluster 14](#cluster-14): Ingredients that you can 'cut'
-  - [Cluster 6](#cluster-6): Small utensils you can 'wash', 'take'
-  - [Cluster 10](#cluster-10) and [Cluster 11](#cluster-11): Spices you can 'sprinkle', 'put' (on)
-  - [Cluster 13](#cluster-13): Appliances you can 'open' and 'close'
-  - Issues:
-    - Examples like [Cluster 3](#cluster-3): semantic genre outside of affordances
-    - Clusters like Cluster 0 are too broad, not that meaningful
-    - Maybe use SHAP with classification to extract subspace related to allowed actions
-
+  - [Cluster 2](#cluster-2): All things you can 'open' and 'close'
+  - [Cluster 3](#cluster-3) and [Cluster 4](#cluster-4): Smaller non-food tools
+  - [Cluster 9](#cluster-9): Ingredients you can 'roll', 'knead'
+  - [Cluster 1](#cluster-1): Pretty large cluster of all food items; no non-food nouns (aside from 'boiler')
 
 
 coherance_score = sum(counts for 5 most common verbs) / len(all verb tokens in the cluster)
@@ -500,3 +483,18 @@ The 'Cluster coherence score' is defined as:
 - strainer
 - alcohol
 - towel:kitchen
+
+
+
+
+## Misc. Notes to Self
+  - Use masked language model to disambiguate verbs not in our vocab
+    - Have probability threshold required to accept it?
+    - https://arxiv.org/pdf/1904.01766v2.pdf
+      - Use structure of `now let me show you how to [MASK] the [MASK]` to extract verb/noun relations
+  - Use either clusters or distance from verbs as prior assumptions about the actions allowed to certain nouns
+  - Use knowledge of a known object being able to be used in a certain way to guide interpretation of foreign object
+  - Fine-tuned BERT produces clusters with lower 'cluster coherence' scores, but much more relevant masked model predictions
+    - Specifically: standard `bert-base-uncased` LM is better at clustering appliances vs. non-appliances
+    - Domain-specific recipe text likely brings these embeddings closer due to the more-frequent co-occurrence, as opposed to Wikipedia data
+    - Unlike with the MLM, we don't provide clustering task with a specific semantic relationship (i.e. similar verbs) to use.
