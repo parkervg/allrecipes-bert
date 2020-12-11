@@ -5,14 +5,14 @@ The co-occurence table of softmax probabilities found at [bert_co-occurrence.csv
 To produce the table at [bert_co-occurrence.csv](data/bert_co-occurrence.csv), for each verb `X` and each noun `Y`, the average of a Bert MLM prediction for both `"now let me show you how to X the [MASK]."` and `"now let me show you how to [MASK] the Y."` were found.
 
 ## Usage
-- For clustering: `python3 lib/cluster_embeds.py {n_clusters} {noun_cap}`
-  - Example: `python3 lib/cluster_embeds.py 15 50`
+- For clustering: `python3 -m lib.clustering.cluster_embeds {n_clusters} {noun_cap}`
+  - Example: `python3 lib.clustering.cluster_embeds 15 50`
   - Outputs: Logging statements of each cluster, some stats, and the nouns in each cluster.
-- For masked language modeling: `python3 lib/mlm.py {text} {results_length}`
-  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." 3`
+- For masked language modeling: `python3 -m cli.mlm {text} {results_length}`
+  - Example: `python3 -m cli.mlm "Next, we want to [MASK] the salmon into thin fillets." 3`
   - Outputs: Top k words most likely to fill in [MASK]
-- For masked language prediction: `python3 lib/mlm_prob.py {text} {word}`
-  - Example: `python3 lib/mlm.py "Next, we want to [MASK] the salmon into thin fillets." "cut"`
+- For masked language prediction: `python3 -m cli.mlm_prob {text} {word}`
+  - Example: `python3 -m cli.mlm_prob "Next, we want to [MASK] the salmon into thin fillets." "cut"`
   - Outputs: softmax probability of target word filling in for [MASK] token.
 
 ## EpicKitchen Co-occurrence Table
