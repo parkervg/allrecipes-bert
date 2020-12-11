@@ -29,6 +29,6 @@ def masked_language_predict(text, k=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Bert masked language modelling.")
     parser.add_argument("text", help="the input text to predict on")
-    parser.add_argument("-k", type=int, default=1, help="number of results to return")
+    parser.add_argument("k", type=int, default=5, help="number of results to return")
     args = parser.parse_args()
     masked_language_predict(args.text, args.k)
