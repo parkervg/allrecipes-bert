@@ -1,8 +1,9 @@
 import sys
-sys.path.append('tools/')
-sys.path.append('lib/')
+
+sys.path.append("tools/")
+sys.path.append("lib/")
 import os
-from typing import (Iterable, Dict, Any, Tuple, List, Sequence, Generator, Callable)
+from typing import Iterable, Dict, Any, Tuple, List, Sequence, Generator, Callable
 import statistics
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,12 +17,15 @@ from pre_process_data import pre_process_data
 from sklearn.cluster import KMeans
 from pre_process_data import pre_process_data
 from custom_logging import Blogger
+
 logger = Blogger()
 
 
 df = pd.read_csv("data/bert_co-occurrence.csv", index_col=0)
 
-verbs,nouns, train_df = pre_process_data()
+verbs, nouns, train_df = pre_process_data()
+
+
 def get_top_epic_verbs(noun: str, n_top_verbs: int, log=False):
     """
     Gets top verbs used in association with noun from self.train_df.
@@ -49,7 +53,9 @@ for i in range(n_clusters):
     flat_verbs = [item for sublist in epic_verbs for item in sublist]
     verb_counts = Counter(flat_verbs)
     try:
-        coherence_score = sum([i[1] for i in verb_counts.most_common()[:n_top_verbs]]) / len(flat_verbs)
+        coherence_score = sum(
+            [i[1] for i in verb_counts.most_common()[:n_top_verbs]]
+        ) / len(flat_verbs)
     except ZeroDivisionError:
         coherence_score = 0.0
     print("#### Cluster coherence score: {}".format(round(coherence_score, 3)))
