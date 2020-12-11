@@ -20,7 +20,6 @@ from custom_logging import Blogger
 
 logger = Blogger()
 
-
 df = pd.read_csv("data/bert_co-occurrence.csv", index_col=0)
 
 verbs, nouns, train_df = pre_process_data()

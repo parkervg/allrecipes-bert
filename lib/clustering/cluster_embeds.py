@@ -1,12 +1,9 @@
 import sys
-
-sys.path.append("tools/")
-sys.path.append("lib/")
 import os
 import pandas as pd
-from BertModeling import BertClustering
-from pre_process_data import pre_process_data
-from custom_logging import Blogger
+from lib.BertModeling import BertClustering
+from lib.pre_process_data import pre_process_data
+from tools.custom_logging import Blogger
 
 logger = Blogger()
 
